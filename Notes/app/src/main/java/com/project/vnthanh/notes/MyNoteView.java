@@ -31,7 +31,7 @@ public class MyNoteView extends TextView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+        super.onDraw(canvas); // nothing to do so far
         //String text = note.Title + "\n" + note.Content;
 
         /*Paint paint = new Paint();

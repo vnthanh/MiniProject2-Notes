@@ -1,5 +1,6 @@
 package com.project.vnthanh.notes;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -35,7 +37,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
 
-        NotesList = FileManager.LoadNotesFromFile(fileInputStream); // may cause error, not error
+        // not create yet??!!
+        try {
+            NotesList = FileManager.LoadNotesFromFile(fileInputStream); // may cause error, not error
+        }catch (Exception e)
+        {
+            // What ??!!
+        }
 
         // notes ini
         /*Note temp = new Note("Note 1","Hey, i am note 1, 05-28 11:01:06.7623354-23366/com.project.vnthanh.notes D/dalvikvm: DEX prep '/data/data/com.project.vnthanh.notes/files/instant-run/dex-temp/reload0x0000.dex': ");
@@ -46,7 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         NotesList.add(temp1);
         NotesList.add(temp2);*/
 
-        LinearLayout ll = (LinearLayout) findViewById(R.id.MyLinearLayout);
+        // Scrollview can host only one child -> create sub ll
+        LinearLayout subLayout = (LinearLayout) findViewById(R.id.SubLinearLayout);
 
         for(int i=0;i<NotesList.size();i++){
             // Need to "attach" note class to note view
@@ -70,29 +79,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             noteView.setId(i); // id = index
             noteView.setOnClickListener(this);
 
-            ll.addView(noteView);
+            subLayout.addView(noteView);
         }
     }
 
     // get note click event and hanle
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case 0:
-                Toast.makeText(MainActivity.this, "Note " + v.getId(), Toast.LENGTH_SHORT).show();
-                break;
-
-            case 1:
-                Toast.makeText(MainActivity.this, "Note " + v.getId(), Toast.LENGTH_SHORT).show();
-                break;
-
-            case 2:
-                Toast.makeText(MainActivity.this, "Note " + v.getId(), Toast.LENGTH_SHORT).show();
-                break;
-        }
+        Toast.makeText(MainActivity.this, "Note " + v.getId(), Toast.LENGTH_SHORT).show();
     }
 
-    public void Bt_NewNote_Clicked(View view) {
-        // Start new activity
+    public void bt_NewNote_Clicked(View view) {
+        // Start new activity (add note)
+        Intent intent =  new Intent(this, AddNoteActivity.class);
+        startActivity(intent);
     }
+
+
 }

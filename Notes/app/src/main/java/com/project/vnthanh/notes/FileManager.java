@@ -1,6 +1,7 @@
 package com.project.vnthanh.notes;
 
 import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -39,6 +40,17 @@ public class FileManager {
         scan.close();
 
         return NotesFromFile;
+    }
+
+    public static void SaveNotesToFile(ArrayList<Note> notes, PrintStream output) {
+        output.println(notes.size());
+
+        for (int i = 0; i < notes.size(); i++) {
+            output.println(notes.get(i).Title);
+            output.println(notes.get(i).Content);
+        }
+
+        output.close();
     }
 
 }
