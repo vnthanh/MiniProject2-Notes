@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -45,19 +46,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // What ??!!
         }
 
-        // notes ini
-        /*Note temp = new Note("Note 1","Hey, i am note 1, 05-28 11:01:06.7623354-23366/com.project.vnthanh.notes D/dalvikvm: DEX prep '/data/data/com.project.vnthanh.notes/files/instant-run/dex-temp/reload0x0000.dex': ");
-        Note temp1 =  new Note("Note 2","Hey, i am note 2");
-        Note temp2 = new Note("Note 3","Hey, i am note 3");
-
-        NotesList.add(temp);
-        NotesList.add(temp1);
-        NotesList.add(temp2);*/
 
         // Scrollview can host only one child -> create sub ll
         LinearLayout subLayout = (LinearLayout) findViewById(R.id.SubLinearLayout);
 
-        for(int i=0;i<NotesList.size();i++){
+        // loop from latest note
+        int nNotes = NotesList.size();
+        for(int i=nNotes-1;i>=0;i--){
             // Need to "attach" note class to note view
             MyNoteView noteView = new MyNoteView(this);
 
@@ -71,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             noteView.setText(currentNote.Title + "\n" + currentNote.Content);
             noteView.setBackgroundColor(Color.CYAN);
 
-            LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             llp.setMargins(0, 20, 0, 0); // llp.setMargins(left, top, right, bottom);
             noteView.setLayoutParams(llp);
 
@@ -80,6 +75,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             noteView.setOnClickListener(this);
 
             subLayout.addView(noteView);
+            noteView.Start();
+
         }
     }
 

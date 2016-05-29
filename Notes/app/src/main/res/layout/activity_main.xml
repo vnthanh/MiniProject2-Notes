@@ -11,6 +11,14 @@
     android:id="@+id/MyLinearLayout"
     tools:context="com.project.vnthanh.notes.MainActivity">
 
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:entries="@array/myTaskArray"
+        android:prompt="@string/chooseTask"
+        android:layout_gravity="right" />
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
