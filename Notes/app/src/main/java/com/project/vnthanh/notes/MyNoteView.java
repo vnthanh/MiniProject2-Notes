@@ -10,6 +10,7 @@ import android.os.CountDownTimer;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -52,6 +53,8 @@ public class MyNoteView extends TextView {
 
     private void update()
     {
+        //Log.d("test", "update() called");
+
         width ++; // hard-coded, increase without limit
         height++;
 
@@ -60,7 +63,7 @@ public class MyNoteView extends TextView {
     }
 
     // hardcode : no limit count
-    CountDownTimer countDownTimer = new CountDownTimer(2000, 10) {
+    CountDownTimer countDownTimer = new CountDownTimer(2000, 1) {
         @Override
         public void onTick(long millisUntilFinished)
         {

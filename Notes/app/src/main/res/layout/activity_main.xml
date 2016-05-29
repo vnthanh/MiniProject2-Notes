@@ -11,13 +11,12 @@
     android:id="@+id/MyLinearLayout"
     tools:context="com.project.vnthanh.notes.MainActivity">
 
-    <Spinner
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
-        android:entries="@array/myTaskArray"
-        android:prompt="@string/chooseTask"
-        android:layout_gravity="right" />
+        android:text="Delete"
+        android:id="@+id/bt_Delete"
+        android:visibility="gone"/>
 
     <Button
         android:layout_width="match_parent"
@@ -26,9 +25,11 @@
         android:id="@+id/bt_NewNote"
         android:onClick="bt_NewNote_Clicked"/>
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
         android:id="@+id/MyScrollView">
         <LinearLayout
             android:layout_width="match_parent"
