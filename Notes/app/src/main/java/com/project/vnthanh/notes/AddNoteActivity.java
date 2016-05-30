@@ -1,7 +1,12 @@
 package com.project.vnthanh.notes;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +21,7 @@ import java.io.PrintStream;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class AddNoteActivity extends AppCompatActivity {
 
@@ -83,8 +89,47 @@ public class AddNoteActivity extends AppCompatActivity {
         }
         FileManager.SaveNotesToFile(NotesList,printStream);
 
+
+        // Alarm notification setting
+        scheduleNotification(getNotification(title, content));
+        ///////////////////////////////////////////////////////////// ????????????????????????
+
         // just start the main activity ?! to reset it, easy!!!??
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent); // bug, return bug
+    }
+
+    // Alarm notification
+    private void scheduleNotification(Notification notification) {
+
+        Intent notificationIntent = new Intent(this, MyReceiver.class);
+        notificationIntent.putExtra(MyReceiver.NOTIFICATION_ID, 1);
+        notificationIntent.putExtra(MyReceiver.NOTIFICATION, notification);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        // set calendar
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.MONTH, datePicker.getMonth());
+        calendar.set(Calendar.YEAR, datePicker.getYear());
+        calendar.set(Calendar.DAY_OF_MONTH, datePicker.getDayOfMonth());
+
+        calendar.set(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
+        calendar.set(Calendar.MINUTE, timePicker.getCurrentMinute());
+        calendar.set(Calendar.SECOND, 0); // hardcode
+        calendar.set(Calendar.AM_PM,Calendar.PM); // hardcode
+
+        //long futureInMillis = SystemClock.elapsedRealtime() + delay;
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        //alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+    }
+
+    private Notification getNotification(String title, String content) {
+        Notification.Builder builder = new Notification.Builder(this);
+        builder.setContentTitle(title);
+        builder.setContentText(content);
+        builder.setSmallIcon(R.drawable.ic_launcher);
+        return builder.build();
     }
 }
