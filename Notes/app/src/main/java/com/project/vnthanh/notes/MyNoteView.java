@@ -14,6 +14,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Timer;
+
 /**
  * Created by USER on 5/28/2016.
  */
@@ -31,21 +33,42 @@ public class MyNoteView extends TextView {
         note = input;
     }
 
+    String titleRectColorString = "#64FFDA"; // rather than hardcode, String , parse later
+    //int contentColor = 0xBBDEFB; dont need here, cuz we have it outside-> kinda dumb
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas); // nothing to do so far
-        //String text = note.Title + "\n" + note.Content;
 
-        // animation update
-        //this.setWidth(width); dont need. cuz, we have set it "match_parent"
-        this.setHeight(height);
+        this.setHeight(height); // animation update each time
 
-        /*Paint paint = new Paint();
+        int rectWidth = this.getWidth();
+
+        Paint paint = new Paint();
+        paint.setColor(Color.parseColor(titleRectColorString));
+
+        canvas.drawRect(new Rect(0, 0, rectWidth, 40), paint);
+
+        paint.setColor(Color.BLACK);
         paint.setTextSize(20);
-        paint.setColor(0xFF000000);
-        canvas.drawColor(0xFFFFFFFF);
-        canvas.drawText(note.Title, 30, 30, paint);
-        canvas.drawText(note.Content, 30, 60, paint);*/
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD)); // Bold title
+
+        canvas.drawText(note.Title,5,25, paint); // currently hardcode
+
+        ////////////////////////////////////////////// use these code to print long text
+        TextPaint mTextPaint=new TextPaint();
+        mTextPaint.setTextSize(18);
+        StaticLayout mTextLayout = new StaticLayout(note.Content, mTextPaint, canvas.getWidth(), Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false);
+
+        canvas.save();
+        // calculate x and y position where your text will be placed
+        int textX = 5;
+        int textY = 50;
+
+        canvas.translate(textX, textY);
+        mTextLayout.draw(canvas);
+        canvas.restore();
+        ///////////////////////////////
 
     }
 
