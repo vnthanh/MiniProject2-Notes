@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.SystemClock;
@@ -97,15 +98,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public boolean onLongClick(View v) {
 
-                    //Toast.makeText(MainActivity.this, "Note " + nv.getId() + " " + nv.toString() + " long click", Toast.LENGTH_SHORT).show();
+                    //
+                    deleteButtonClickedIdx = v.getId() + 1;
+
+                    final Button belowDeleteButton = new Button(MainActivity.this);
+
+                    //Button deleteButton = (Button) findViewById(R.id.bt_Delete); // just for param, nothing to use here
+                    //deleteButton.setVisibility(View.VISIBLE);
+                    //belowDeleteButton.setLayoutParams(deleteButton.getLayoutParams());
+
+                    belowDeleteButton.setBackground(Drawable.createFromPath("@android:drawable/dialog_holo_light_frame"));
+                    belowDeleteButton.setBackgroundColor(Color.parseColor("#EEEEEE"));
+                    belowDeleteButton.setTextSize(15);
+                    belowDeleteButton.setText("Delete this note");
+
+                    subLayout.addView(belowDeleteButton, v.getId()+1); // bugs ?????!!!!!!!!!!!!!!!
 
 
-                    final Button deleteButton = (Button) findViewById(R.id.bt_Delete);
-                    deleteButton.setVisibility(View.VISIBLE);
-
-                    deleteButton.setOnClickListener(new View.OnClickListener() {
+                    belowDeleteButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+
+                            subLayout.removeView(belowDeleteButton); // remove right away delete button
+
                             //Remove from array list
                             // bug when remove by id due to update index problem, -> remove by title
 
@@ -122,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             // Remove from parent view
                             //subLayout.removeViewAt(noteView.getId());
                             subLayout.removeViewAt(position); // fixed
-                            Toast.makeText(MainActivity.this, "size = " + NotesList.size() + "-id = " + noteView.getId(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(MainActivity.this, "size = " + NotesList.size() + "-id = " + noteView.getId(), Toast.LENGTH_SHORT).show();
 
                             //Update to file
                             // write all notes to file (with 1 more note -> dummy code)
@@ -139,7 +154,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             }
                             FileManager.SaveNotesToFile(NotesList,printStream);
 
-                            deleteButton.setVisibility(View.GONE);
+                            //deleteButton.setVisibility(View.GONE);
+                            //belowDeleteButton.setVisibility(View.GONE);
+
                         }
                     });
 
@@ -158,8 +175,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         //Toast.makeText(MainActivity.this, "Note " + v.getId(), Toast.LENGTH_SHORT).show();
         //Toast.makeText(MainActivity.this, "size = " + NotesList.size() + "-id = " + v.getId(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "Some note clicked", Toast.LENGTH_SHORT).show();
     }
-
 
     public void bt_NewNote_Clicked(View view) {
         // Start new activity (add note)
@@ -167,5 +184,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
 
         //finish();
+    }
+
+    // bug : idx problem
+    int deleteButtonClickedIdx = -1;
+    // temp dummy solution to handle button click flow (when to hide delete button if not thing happen)
+    public void ll_Clicked(View view) {
+        if(deleteButtonClickedIdx != -1)
+        {
+            subLayout.removeViewAt(deleteButtonClickedIdx);
+        }
     }
 }

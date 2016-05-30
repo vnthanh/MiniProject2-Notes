@@ -24,36 +24,44 @@
                 android:layout_height="wrap_content"
                 android:text="Note title"
                 android:id="@+id/et_NoteTitle"
-                />
+                android:onClick="et_NoteTitle_Clicked"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Note content"
-                android:id="@+id/et_NoteContent"/>
+                android:id="@+id/et_NoteContent"
+                android:onClick="et_NoteContent_Clicked"
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Select time"
-                android:textAlignment="center"/>
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
 
             <TimePicker
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/timePicker"
-                android:layout_gravity="start"/>
+                android:layout_gravity="start"
+                android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Select date"
-                android:textAlignment="center"/>
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
 
             <DatePicker
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:calendarViewShown="false"
                 android:id="@+id/datePicker"
+                android:layout_marginLeft="15dp"
                 ></DatePicker>
 
             <Button
@@ -61,7 +69,8 @@
                 android:layout_height="wrap_content"
                 android:text="OK"
                 android:id="@+id/bt_AddNoteNow"
-                android:onClick="bt_AddNoteNow_Clicked"/>
+                android:onClick="bt_AddNoteNow_Clicked"
+                android:background="@android:drawable/dialog_holo_light_frame"/>
 
         </LinearLayout>
 

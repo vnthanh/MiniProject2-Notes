@@ -143,4 +143,13 @@ public class AddNoteActivity extends AppCompatActivity {
 
         return builder.build();
     }
+
+    public void et_NoteTitle_Clicked(View view) {
+        et_title.setText("");
+    }
+
+    public void et_NoteContent_Clicked(View view) {
+        et_content.setText("");
+    }
+
 }
