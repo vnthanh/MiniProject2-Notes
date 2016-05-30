@@ -95,8 +95,9 @@ public class AddNoteActivity extends AppCompatActivity {
         ///////////////////////////////////////////////////////////// ????????????????????????
 
         // just start the main activity ?! to reset it, easy!!!??
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(AddNoteActivity.this, MainActivity.class);
         startActivity(intent); // bug, return bug
+        finish(); //? not finish -> still live
     }
 
     // Alarm notification
@@ -130,6 +131,16 @@ public class AddNoteActivity extends AppCompatActivity {
         builder.setContentTitle(title);
         builder.setContentText(content);
         builder.setSmallIcon(R.drawable.ic_launcher);
+
+        // TODO: what happen when clicking notification ("button")
+        Intent intent = new Intent(this, MainActivity.class);
+
+        PendingIntent pending = PendingIntent.getActivity(this, 0, intent, 0);
+        builder.setContentIntent(pending);
+        // Block above solve: click -> simply start app (Main activity)
+        // Ref : standford cs193a, notification
+
+
         return builder.build();
     }
 }

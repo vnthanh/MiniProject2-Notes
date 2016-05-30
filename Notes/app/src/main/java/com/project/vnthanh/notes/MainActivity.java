@@ -160,11 +160,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Toast.makeText(MainActivity.this, "size = " + NotesList.size() + "-id = " + v.getId(), Toast.LENGTH_SHORT).show();
     }
 
+
     public void bt_NewNote_Clicked(View view) {
         // Start new activity (add note)
         Intent intent =  new Intent(this, AddNoteActivity.class);
         startActivity(intent);
 
+        //finish();
     }
-
 }

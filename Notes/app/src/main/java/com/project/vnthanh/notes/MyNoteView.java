@@ -37,7 +37,7 @@ public class MyNoteView extends TextView {
         //String text = note.Title + "\n" + note.Content;
 
         // animation update
-        this.setWidth(width);
+        //this.setWidth(width); dont need. cuz, we have set it "match_parent"
         this.setHeight(height);
 
         /*Paint paint = new Paint();
@@ -55,15 +55,15 @@ public class MyNoteView extends TextView {
     {
         //Log.d("test", "update() called");
 
-        width ++; // hard-coded, increase without limit
-        height++;
+        //width ++; // hard-coded, increase without limit
+        height = height + 10; //!!
 
         ////////////////////
         invalidate();
     }
 
-    // hardcode : no limit count
-    CountDownTimer countDownTimer = new CountDownTimer(2000, 1) {
+    // hardcode : no limit count, count affects frame speed ?!!
+    CountDownTimer countDownTimer = new CountDownTimer(300, 1) {
         @Override
         public void onTick(long millisUntilFinished)
         {
