@@ -5,17 +5,23 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 
 public class AddNoteActivity extends AppCompatActivity {
 
     EditText et_title, et_content;
+    TimePicker timePicker;
+    DatePicker datePicker;
 
     // Dummy code: load everything, write everything
     ArrayList<Note> NotesList;
@@ -41,11 +47,16 @@ public class AddNoteActivity extends AppCompatActivity {
 
         et_title = (EditText) findViewById(R.id.et_NoteTitle);
         et_content = (EditText) findViewById(R.id.et_NoteContent);
+
+        timePicker = (TimePicker) findViewById(R.id.timePicker);
+        datePicker = (DatePicker) findViewById(R.id.datePicker);
     }
 
     public void bt_AddNoteNow_Clicked(View view) {
         String title = et_title.getText().toString();
         String content = et_content.getText().toString();
+        Time time = new Time(timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0) ; // o second
+        Date date = new Date(datePicker.getYear(),datePicker.getMonth(),datePicker.getDayOfMonth());
 
         /*Intent intent = new Intent();
         intent.putExtra("title",title);
@@ -55,7 +66,7 @@ public class AddNoteActivity extends AppCompatActivity {
         // dont need result
 
         // Add note taken to array list
-        NotesList.add(new Note(title,content));
+        NotesList.add(new Note(title,content, time, date));
 
         // write all notes to file (with 1 more note -> dummy code)
 

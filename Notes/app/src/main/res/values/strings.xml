@@ -1,10 +1,3 @@
 <resources>
     <string name="app_name">Notes</string>
-    <string name="chooseTask">Choose Task</string>
-    <string-array name="myTaskArray">
-        <item>value 1</item>
-        <item>value 2</item>
-        <item>value 3</item>
-        <item>value 4</item>
-    </string-array>
 </resources>

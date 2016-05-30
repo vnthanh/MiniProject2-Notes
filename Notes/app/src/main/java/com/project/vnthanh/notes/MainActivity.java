@@ -72,7 +72,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             noteView.setSingleLine(false);
             noteView.setLines(4); // hard-coded
 
-            noteView.setText(currentNote.Title + "\n" + currentNote.Content);
+            noteView.setText(currentNote.Title + "\n" +
+                    currentNote.Content + "\n\n" +
+                    currentNote.RemindTime.toString() + " " +
+                    currentNote.RemindDate.toString());
+
             noteView.setBackgroundColor(Color.CYAN);
 
             LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);

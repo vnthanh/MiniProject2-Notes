@@ -2,6 +2,8 @@ package com.project.vnthanh.notes;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,6 +25,8 @@ public class FileManager {
         Note tempNote;
         String tempTitle;
         String tempContent;
+        Time tempTime;
+        Date tempDate;
 
         int nNotes = scan.nextInt();
         scan.nextLine();
@@ -32,8 +36,10 @@ public class FileManager {
         for (int i = 0; i < nNotes; i++) {
             tempTitle = scan.nextLine();
             tempContent = scan.nextLine();
+            tempTime = Time.valueOf(scan.nextLine());
+            tempDate = Date.valueOf(scan.nextLine());
 
-            tempNote = new Note(tempTitle, tempContent);
+            tempNote = new Note(tempTitle, tempContent, tempTime, tempDate);
             NotesFromFile.add(tempNote);
         }
 
@@ -48,6 +54,8 @@ public class FileManager {
         for (int i = 0; i < notes.size(); i++) {
             output.println(notes.get(i).Title);
             output.println(notes.get(i).Content);
+            output.println(notes.get(i).RemindTime.toString());
+            output.println(notes.get(i).RemindDate.toString());
         }
 
         output.close();

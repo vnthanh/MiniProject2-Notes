@@ -10,22 +10,60 @@
     android:orientation="vertical"
     tools:context="com.project.vnthanh.notes.AddNoteActivity">
 
-    <EditText
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Note title"
-        android:id="@+id/et_NoteTitle"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Note content"
-        android:id="@+id/et_NoteContent"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="OK"
-        android:id="@+id/bt_AddNoteNow"
-        android:onClick="bt_AddNoteNow_Clicked"/>
+        android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Note title"
+                android:id="@+id/et_NoteTitle"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Note content"
+                android:id="@+id/et_NoteContent"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select time"
+                android:textAlignment="center"/>
+
+            <TimePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/timePicker"
+                android:layout_gravity="start"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select date"
+                android:textAlignment="center"/>
+
+            <DatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:calendarViewShown="false"
+                android:id="@+id/datePicker"
+                ></DatePicker>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="OK"
+                android:id="@+id/bt_AddNoteNow"
+                android:onClick="bt_AddNoteNow_Clicked"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>
