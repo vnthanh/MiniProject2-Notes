@@ -30,7 +30,7 @@ public class AddNoteActivity extends AppCompatActivity {
     DatePicker datePicker;
 
     // Dummy code: load everything, write everything
-    ArrayList<Note> NotesList;
+    ArrayList<Note> NotesList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,11 @@ public class AddNoteActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        NotesList = FileManager.LoadNotesFromFile(fileInputStream); // may cause error, not error
+        try {
+            NotesList = FileManager.LoadNotesFromFile(fileInputStream); // may cause error, not error
+        }
+        catch (Exception e)
+        {}
 
         et_title = (EditText) findViewById(R.id.et_NoteTitle);
         et_content = (EditText) findViewById(R.id.et_NoteContent);

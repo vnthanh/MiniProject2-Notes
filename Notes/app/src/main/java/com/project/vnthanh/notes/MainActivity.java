@@ -33,7 +33,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ArrayList<Note> NotesList;
+    ArrayList<Note> NotesList = new ArrayList<>();
 
     LinearLayout subLayout;
 

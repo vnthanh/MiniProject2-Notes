@@ -1,6 +1,8 @@
 package com.project.vnthanh.notes;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -36,6 +38,7 @@ public class MyNoteView extends TextView {
     String titleRectColorString = "#64FFDA"; // rather than hardcode, String , parse later
     //int contentColor = 0xBBDEFB; dont need here, cuz we have it outside-> kinda dumb
 
+    // currently hard-coding =====================================================
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas); // nothing to do so far
@@ -70,6 +73,16 @@ public class MyNoteView extends TextView {
         canvas.restore();
         ///////////////////////////////
 
+        // Draw date/time
+        Paint newPaint = new Paint();
+        canvas.drawText(note.RemindDate.toString()+" " + note.RemindTime.toString(),300,130, newPaint);
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.clock);
+
+        canvas.drawBitmap(bitmap
+                , 280, 116, null);
+
+
     }
 
     int width = 0, height=0;
@@ -79,7 +92,8 @@ public class MyNoteView extends TextView {
         //Log.d("test", "update() called");
 
         //width ++; // hard-coded, increase without limit
-        height = height + 10; //!!
+        if (height < 500) height = height + 10; //!!
+        // hardcoded limit
 
         ////////////////////
         invalidate();
